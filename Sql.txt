@@ -1,0 +1,248 @@
+								SQL(Structured Query Language)
+8th nov live class github and eclipse integration.
+
+SQL is Declarative Language.
+
+SQL follows snake casing rule.
+
+There is no String concept in Sql ,in Sql varchar means dont consume so much of memory only consume specified memory.
+
+Ex:stud_id
+
+Java is imperative Language whatever you want to  need to specify.
+
+SQL is language.
+
+RDBMS
+-------
+Mysql
+MariaDB
+OracleServer--->These are all RBDMS
+SqlLite 
+
+NoSql
+------
+MongoDB    
+Hbase
+Cassandra
+
+SQL is caseinsensitive.
+
+In SQL commands are Capital letters.   
+
+Creation of database.
+
+create database databasename;
+
+use ineuron;-->So many databases so before creating table we have to write use ineuron.
+
+use ineuron;
+
+numeric-->int
+String---->varchar-->256 characters
+
+create table Student
+(
+id	int(10)
+name  varchar(20)
+age   int(5)
+city  varchar(20)
+);
+show databases;
+show tables;
+Describe table;
+Desc table;
+
+											Naveen Sir notes
+1.DDL(Data Defination Language)
+
+*Creating the table
+
+*Dropping the table 	
+
+2.DML(Data Manipulation Language)
+
+*Inserting the data
+
+*Delete the data
+
+*Update the data
+
+3.DCL(Data Control Language)
+
+Permission like
+
+*Grant
+
+*Revoke
+4.TCL(Transaction Control Language)
+
+*Commit 
+
+*Rollback
+
+5.DQL(Data Query Laungauge)
+
+Sql gave these statements to work with.
+
+Data Defination Language(DDL)
+--------------------------------
+1.Create database
+
+2.Create table
+
+3.Alter table
+
+4.drop table
+
+5.drop database
+
+
+Data MAnipultion Launguage(DML)
+--------------------------------
+1.insert 
+
+2.update 
+
+3.delete
+
+Data Query Language
+--------------------------------
+1.Select
+
+
+Data Control Language
+--------------------------------
+1.Grant
+
+2.Revoke
+
+Tranasaction Control language
+--------------------------------
+1.commit
+
+2.Rollback
+
+DCL and TCL comes under administration part 
+
+Steps to follow to connect with neuro lab for Mysql
+
+1.ineuron.ai
+
+2.Start your lab
+
+3.lab templates--->Start your MySql Lab-->Do you want to clone any Github repository?-No--click on Proceed.
+
+4.Click on create Connection.
+
+5.Default port number of MySql 3306
+
+6.username:abc Password:password
+
+7.Click on connect
+
+How create a database?
+
+1.Click on + symbol(Create new Database)
+
+ No you will get one script
+
+ Create database ineuron;
+
+Syntax to create table 
+------------------------
+create table tablename(field1(datatype),field2(datatype),...);
+
+Example:create table student(stud_id Int,stud_name varchar(50),marks INT);
+
+Show table--It will show the table created inside the db.
+
+Syntax for inserting the data inside the table
+------------------------------------------------
+insert into tablename coloumname and values
+
+Syntax to insert single row
+----------------------------------------------
+insert into student(stud_id,stud_name,marks)values(1,'naveen',70);
+
+
+Syntax to insert multiple rows
+----------------------------------------------
+insert into student values(2,'Wasem',65),(3,'Nagesh',90),(4,'Chaitra',95);
+
+syntax to see the coloumn name from student table
+-----------------------------------------------
+1.select stud_name from student;
+//This query will give only name of the students
+    	  stud_name
+         Naveen
+         Wasim
+	   haider
+
+2.select * from student;
+//This qery will give entire table
+stud_id    stud_name	stud_marks
+1		naveen	  70
+2		wasim         80
+3		haider        90
+
+
+Agregate Functions
+---------------------------
+1.Min
+2.Max
+3.Avg
+
+Select stud_name from student where marks=70;
+ 
+But we dont' know exactly how much marks so write subquery
+
+select min(marks) from student so replace the 70.
+
+Select stud_name from student where marks=(select min(marks) from student);
+//This query will give get min marks in the table
+stud_name
+Naveen
+
+Syntax Update
+--------------------------
+update tablename set column name where=?
+
+update student1 set stud_marks=75 where stud_id=1;
+
+Syntax alter
+---------------------------
+How to add extra coloumn for table?
+
+alter table student add COLUMN tech VARCHAR(50);
+
+Syntax delete
+-------------------------------
+delete from student where id=?
+
+Primary and Foreign key relationship.
+--------------------------------------
+//Creating primary key syntax
+create table course(c_id int,c_name VARCHAR(20),mentor VARCHAR(50),duration int,PRIMARY key(c_id));
+
+//Creating foreign key syntax.
+create table student(s_id int,s_name VARCHAR(30),c_id INT,assigns int,PRIMARY key(s_id),FOREIGN key(c_id) REFERENCES course(c_id));
+
+insert into student VALUES(1,'Mohit',101,3);
+//If you try insert data to the child table you ll get following error in the sql.
+Error:Cannot add or update a child row:
+ a foreign key constraint fails (`test`.`student`, CONSTRAINT `student_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `course` (`c_id`))
+
+select * from student where c_id=(select c_id from course where c_name= 'java');
+
+Note:Subquery return multiple row use IN operator instead of %.
+
+select * from student where c_id IN(select c_id from course where c_name like 'j%');
+
+Start with means % is after the character.
+Ends with means % is before the character.
+
+
+
+
+
